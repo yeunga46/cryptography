@@ -60,18 +60,35 @@ public class BigNumber {
 		int sum;
 		int carry = 0;
 		int shortest;
-		
+		int shortArray;
 		if (array1.size() >= array2.size())
 		{
 			shortest = array2.size();
+			shortArray = 2;
 		}
 		else{
 			shortest = array1.size();
+			shortArray = 1;
 		}
+		
+		int diff = Math.abs(array2.size() - array1.size());
 		for (int i = 0; i < shortest + 1; i++)
 		{
 			sumArray.add(0);
 		}
+		
+		for (int i = 0; i < diff; i++)
+		{
+			if (shortArray == 2)
+			{
+				array2.add(shortest + i, 0);
+			}
+			else
+			{
+				array1.add(shortest + i, 0);
+			}
+		}
+		
 		for(int i = 0; i < array1.size(); i++)
 		{
 			sum = array1.get(i) + array2.get(i) + carry;
@@ -91,6 +108,7 @@ public class BigNumber {
 		{
 			sumArray.set(shortest, 1);
 		}
+		
 		return new BigNumber(reverse(sumArray));
 	}
 	
