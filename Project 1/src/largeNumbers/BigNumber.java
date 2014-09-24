@@ -12,14 +12,33 @@ import java.util.Collections;
  */
 public class BigNumber {
 	ArrayList<Integer> valArray = new ArrayList<Integer>();
+	Boolean negative = false;
 	
 	BigNumber(String val)
 	{
 		char[] charArray = val.toCharArray();
 		
-		for (int i = 0; i < charArray.length; i++) {
+		int n = charArray.length;
+		
+		for (int i = 0; i < n; i++) {
 			int a = Character.getNumericValue(charArray[i]);
-			valArray.add(i, a);
+			if (Character.getNumericValue(charArray[0]) == -1) {
+				negative = true;
+				if (i == 0) {
+					valArray.add(i, 9);
+				} else {
+					int temp = 9 - a;
+					if ((n - 1) == i) {
+						valArray.add(i, (temp + 1));
+					} else {
+
+						valArray.add(i, temp);
+					}
+				}
+
+			} else {
+				valArray.add(i, a);
+			}
 		}
 		
 		System.out.println(valArray);
